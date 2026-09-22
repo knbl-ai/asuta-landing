@@ -57,6 +57,8 @@
   display: none;
 }
 
+/* Four icons: the design had a fifth (Telegram), removed at the client's request.
+   Mobile keeps the row centred; desktop keeps it flush with the text's right edge. */
 .social {
   position: absolute;
   left: 0;
@@ -86,25 +88,21 @@
   height: auto;
 }
 
-.telegram {
-  left: 27.22rem;
-  width: 4.29rem !important;
-}
 
 .tiktok {
-  left: 22.1rem;
+  left: 24.71rem;
 }
 
 .instagram {
-  left: 16.97rem;
+  left: 19.58rem;
 }
 
 .facebook {
-  left: 11.83rem;
+  left: 14.44rem;
 }
 
 .youtube {
-  left: 6.72rem;
+  left: 9.33rem;
 }
 
 .brand {
@@ -211,25 +209,21 @@
     width: 5.3rem;
   }
 
-  .telegram {
-    left: 148.69rem;
-    width: 5.47rem !important;
-  }
 
   .tiktok {
-    left: 142.18rem;
+    left: 148.86rem;
   }
 
   .instagram {
-    left: 135.65rem;
+    left: 142.33rem;
   }
 
   .facebook {
-    left: 129.11rem;
+    left: 135.79rem;
   }
 
   .youtube {
-    left: 122.61rem;
+    left: 129.26rem;
   }
 
   .brand {

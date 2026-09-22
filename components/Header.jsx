@@ -13,6 +13,7 @@ const NAV = [
 
 export default function Header({ showNav = true }) {
   const [open, setOpen] = useState(false);
+  const [pinned, setPinned] = useState(false);
   const dialogRef = useRef(null);
   const close = useCallback(() => setOpen(false), []);
 
@@ -35,6 +36,28 @@ export default function Header({ showNav = true }) {
     };
   }, [open]);
 
+  /*
+   * Desktop: the "contact us" button pins to the top of the screen once the page
+   * scrolls past it. The threshold is the scroll offset at which the button's
+   * design position (8.76rem) reaches the pinned position (1.6rem), so it hands
+   * over without a jump.
+   */
+  useEffect(() => {
+    if (!showNav) return;
+    const desktop = window.matchMedia('(min-width: 1100px)');
+    const onScroll = () => {
+      const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+      setPinned(desktop.matches && window.scrollY > (8.76 - 1.6) * rem);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    desktop.addEventListener('change', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      desktop.removeEventListener('change', onScroll);
+    };
+  }, [showNav]);
+
   return (
     <header className={styles.header} id="top" role="banner">
       <div className={`frame ${styles.frame}`}>
@@ -54,7 +77,7 @@ export default function Header({ showNav = true }) {
                 </a>
               ))}
             </nav>
-            <a href="#contact" className={styles.cta}>
+            <a href="#contact" className={`${styles.cta} ${pinned ? styles.ctaPinned : ''}`}>
               צרו איתנו קשר
             </a>
 

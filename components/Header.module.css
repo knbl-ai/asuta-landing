@@ -215,6 +215,17 @@
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   }
 
+  /* Stays on screen while scrolling (see Header.jsx). Same x as in the design,
+     measured from the 1600pt frame, which is centred on wide screens. */
+  .ctaPinned {
+    position: fixed;
+    top: 1.6rem;
+    left: max(5.8rem, calc(50% - 80rem + 5.8rem));
+    z-index: 40;
+    background: var(--white);
+    box-shadow: 0 0.4rem 1.6rem rgb(30 60 149 / 0.16);
+  }
+
   .cta:hover {
     background: var(--maccabi);
     border-color: var(--maccabi);

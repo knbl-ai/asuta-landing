@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import LeadForm from './LeadForm';
 import LogoMark from './LogoMark';
 import { LEGAL, PHONES, SOCIAL } from '@/lib/site';
@@ -6,7 +7,7 @@ import styles from './ContactFooter.module.css';
 
 export default function ContactFooter() {
   return (
-    <footer className={styles.footer} id="contact">
+    <footer className={styles.footer} id="contact" role="contentinfo">
       <div className={`frame ${styles.frame}`}>
         <div className={styles.panel} aria-hidden="true" />
 
@@ -26,7 +27,9 @@ export default function ContactFooter() {
               8480<span className={styles.star}>*</span>
             </a>
           </span>
-          <span className={styles.sep}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+          <span className={styles.sep} aria-hidden="true">
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+          </span>
           <br className="br-mobile" />
           <span>
             טלפון בית החולים: <a href={`tel:${PHONES.hospital.tel}`}>{PHONES.hospital.label}</a>
@@ -36,7 +39,7 @@ export default function ContactFooter() {
         <ul className={styles.social}>
           {SOCIAL.map((s) => (
             <li key={s.id} className={styles[s.id]}>
-              <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+              <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`${s.label} (נפתח בחלון חדש)`}>
                 <Image src={`/icons/${s.id}.svg`} alt="" width={55} height={55} unoptimized />
               </a>
             </li>
@@ -53,12 +56,23 @@ export default function ContactFooter() {
         <LeadForm />
 
         <p className={styles.copyright}>
-          © אסותא אשדוד - כל הזכויות שמורות<span className={styles.copySep}> | </span>
+          © אסותא אשדוד - כל הזכויות שמורות
+          <span className={styles.copySep} aria-hidden="true">
+            {' | '}
+          </span>
           <br className="br-mobile" />
           <a href={LEGAL.privacy}>מדיניות פרטיות</a>
-          <span className={styles.legalSep}>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; </span>
+          <span className={styles.legalSep} aria-hidden="true">
+            &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{' '}
+          </span>
           <span className={styles.legalJoin}> </span>
           <a href={LEGAL.terms}>ותנאי שימוש</a>
+          <span className={styles.copySep} aria-hidden="true">
+            {' | '}
+          </span>
+          <br className="br-mobile" />
+          {/* Required by the accessibility regulations to be reachable from every page. */}
+          <Link href="/accessibility">הצהרת נגישות</Link>
         </p>
       </div>
     </footer>

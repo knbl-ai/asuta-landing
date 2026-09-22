@@ -1,6 +1,7 @@
 /* Mobile (375pt frame). Section starts at design y=3340 */
 .frame {
-  height: 110.2rem;
+  /* +3.32rem over the design for the accessibility statement link */
+  height: 113.52rem;
   color: var(--white);
 }
 
@@ -9,7 +10,7 @@
   left: 0.98rem;
   top: 1rem;
   width: 35.52rem;
-  height: 108.2rem;
+  height: 111.52rem;
   background: var(--brand-gradient);
 }
 
@@ -248,9 +249,9 @@
   }
 
   .copyright {
-    left: 15.01rem;
+    left: 8.43rem;
     top: 59.02rem;
-    width: 46.85rem;
+    width: 60rem;
     line-height: 1.252;
   }
 

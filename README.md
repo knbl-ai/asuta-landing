@@ -6,6 +6,7 @@ Assuta's Salesforce (Web-to-Lead) along with the Google Ads click id (GCLID), an
 sent to `/thank-you`.
 
 Stack: Next.js 16 (App Router), React 19, plain CSS modules. No UI framework.
+Accessibility: WCAG 2.1 AA / IS 5568, with a preference panel and a published statement.
 
 ## Run locally
 
@@ -13,6 +14,15 @@ Stack: Next.js 16 (App Router), React 19, plain CSS modules. No UI framework.
 npm install
 cp .env.example .env.local   # SF_MODE=mock by default: leads are logged, not sent
 npm run dev                  # http://localhost:3000
+```
+
+Other scripts:
+
+```bash
+npm run lint             # ESLint with the full jsx-a11y ruleset
+# accessibility checks, against a production server (npm run build && npm run start)
+npm run a11y             # axe-core over every route x width x interactive state
+npm run a11y:behaviour   # keyboard, dialogs, panel, marquee, forms, reflow
 ```
 
 In mock mode every lead is printed to the console and appended to `leads.dev.log`.
@@ -58,6 +68,27 @@ Line breaks that exist in only one layout use `<br className="br-desktop" />` / 
 `npm run shots -- http://localhost:3000 screenshots` saves full-page screenshots at both design widths
 (needs Google Chrome), for comparing against the PDF.
 
+## Accessibility
+
+Built to **IS 5568** (WCAG 2.1 AA), which binds any organisation serving the Israeli
+public. Compliance rests on the markup: landmarks, skip link, focus indicators, a real
+modal dialog for the mobile menu, a pause control for the moving departments strip,
+accessible form errors, reduced-motion support and AA contrast.
+`components/A11yPanel.jsx` is a **user-preference panel, not an accessibility overlay**:
+it sets `data-a11y-*` attributes on `<html>` and touches nothing in the accessibility tree.
+
+Two deliberate visual changes from the PDF, both contrast fixes: the turquoise end of the
+hero/footer gradient is darker (`#15809A` instead of `#1A94B2`), and the hero photos have
+a soft dark fade behind their captions. The mobile footer is 33px taller for the
+accessibility statement link.
+
+**Before launch:** fill in the accessibility coordinator's name, email and phone in
+`lib/accessibility.js`. They are `{{ }}` placeholders, and the statement page
+(`/accessibility`) shows a warning until they are replaced.
+
+See [`docs/accessibility.md`](docs/accessibility.md) for the measurements, implementation
+notes and open items.
+
 ## Deploy (Vercel)
 
 Import the repository in Vercel and set the environment variables above (`SF_MODE=live`).
@@ -68,4 +99,4 @@ Import the repository in Vercel and set the environment variables above (`SF_MOD
 - The production Salesforce org id and GCLID field id.
 - The card photos in the design are stock previews with "Magnific" watermarks. They need to be
   replaced with licensed images before launch (`assets/images/card-*`).
-- Accessibility (WCAG 2.1 AA / IS 5568) is planned as the next phase.
+- The accessibility coordinator's contact details (`lib/accessibility.js`).

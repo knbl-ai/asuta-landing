@@ -11,8 +11,11 @@ export const metadata = {
 export default function ThankYou() {
   return (
     <>
+      <a href="#content" className="skip-link">
+        דילוג לתוכן העמוד
+      </a>
       <Header showNav={false} />
-      <main className={`frame ${styles.frame}`}>
+      <main id="content" tabIndex={-1} className={`frame ${styles.frame}`}>
         <section className={styles.panel} aria-labelledby="thanks-title">
           <svg className={styles.dot} viewBox="0 0 40 40" aria-hidden="true">
             <defs>
@@ -42,8 +45,14 @@ export default function ThankYou() {
             חזרה לעמוד הראשי
           </Link>
         </section>
-        <p className={styles.copyright}>© אסותא אשדוד - כל הזכויות שמורות</p>
       </main>
+      <footer className={`frame ${styles.footer}`}>
+        <p className={styles.copyright}>
+          © אסותא אשדוד - כל הזכויות שמורות
+          <span aria-hidden="true"> | </span>
+          <Link href="/accessibility">הצהרת נגישות</Link>
+        </p>
+      </footer>
     </>
   );
 }

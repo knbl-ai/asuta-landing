@@ -74,6 +74,8 @@ export default function LeadForm() {
         value={values.fullName}
         onChange={set('fullName')}
         aria-invalid={!!errors.fullName}
+        aria-required="true"
+        aria-describedby={errors.fullName ? 'lead-message' : undefined}
       />
 
       <label className="sr-only" htmlFor="lead-phone">
@@ -91,6 +93,8 @@ export default function LeadForm() {
         value={values.phone}
         onChange={set('phone')}
         aria-invalid={!!errors.phone}
+        aria-required="true"
+        aria-describedby={errors.phone ? 'lead-message' : undefined}
       />
 
       <label className="sr-only" htmlFor="lead-department">
@@ -103,6 +107,8 @@ export default function LeadForm() {
         value={values.department}
         onChange={set('department')}
         aria-invalid={!!errors.department}
+        aria-required="true"
+        aria-describedby={errors.department ? 'lead-message' : undefined}
       >
         <option value="" disabled>
           בחירת תחום רפואי
@@ -133,15 +139,18 @@ export default function LeadForm() {
         checked={values.terms}
         onChange={set('terms')}
         aria-invalid={!!errors.terms}
+        aria-required="true"
+        aria-describedby={errors.terms ? 'lead-message' : undefined}
       />
       <label htmlFor="lead-terms" className={styles.terms}>
         קראתי ואני מאשר/ת את{' '}
         <a href={LEGAL.terms} target="_blank" rel="noopener noreferrer">
           תנאי השימוש
+          <span className="sr-only"> (נפתח בחלון חדש)</span>
         </a>
       </label>
 
-      <p className={styles.message} role="alert" aria-live="assertive">
+      <p id="lead-message" className={styles.message} role="alert">
         {message}
       </p>
 

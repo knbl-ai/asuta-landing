@@ -1,4 +1,5 @@
 import { DEPARTMENTS } from '@/lib/departments';
+import MarqueeToggle from './MarqueeToggle';
 import styles from './Departments.module.css';
 
 const byId = Object.fromEntries(DEPARTMENTS.map((d) => [d.id, d]));
@@ -158,8 +159,9 @@ export default function Departments() {
           מחלקות בית החולים השונות <br className="br-mobile" />
           עומדות לשירותכם
         </h2>
+        <MarqueeToggle targetId="departments-strip" />
       </div>
-      <div className={styles.strip}>
+      <div className={styles.strip} id="departments-strip">
         {ROWS.desktop.map((row) => (
           <Row key={row.key} row={row} className={styles.rowDesktop} />
         ))}

@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "shots": "node scripts/screenshots.mjs"
+    "shots": "node scripts/screenshots.mjs",
+    "lint": "eslint .",
+    "a11y": "node scripts/a11y-audit.mjs",
+    "a11y:behaviour": "node scripts/a11y-behaviour.mjs"
   },
   "dependencies": {
     "next": "^16.3.5",
@@ -14,6 +17,10 @@
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.5",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
     "playwright-core": "^1.63.0"
   },
   "engines": {

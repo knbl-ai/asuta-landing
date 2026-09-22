@@ -7,6 +7,9 @@ const nextConfig = {
     qualities: [75, 85],
   },
   poweredByHeader: false,
+  // The dev-tools badge has no focus indicator and shows up as a phantom keyboard
+  // failure in the accessibility checks.
+  devIndicators: false,
 };
 
 export default nextConfig;

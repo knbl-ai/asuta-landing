@@ -8,8 +8,11 @@ import ContactFooter from '@/components/ContactFooter';
 export default function Home() {
   return (
     <>
+      <a href="#content" className="skip-link">
+        דילוג לתוכן העמוד
+      </a>
       <Header />
-      <main>
+      <main id="content" tabIndex={-1}>
         <Hero />
         <Expertise />
         <Departments />

@@ -65,6 +65,8 @@ export default function Testimonials() {
   useEffect(() => {
     const el = scroller.current;
     if (!el || getComputedStyle(el).overflowX !== 'auto') return;
+    // A scrollable region must be reachable by keyboard (arrow keys scroll it once focused).
+    el.tabIndex = 0;
     const first = el.querySelector('li');
     const a = first.getBoundingClientRect();
     const b = el.getBoundingClientRect();
@@ -77,7 +79,7 @@ export default function Testimonials() {
         <h2 id="testimonials-title" className={styles.title}>
           המטופלים שלנו אומרים תודה
         </h2>
-        <ul className={styles.cards} ref={scroller}>
+        <ul className={styles.cards} ref={scroller} aria-label="המלצות מטופלים">
           {TESTIMONIALS.map((t) => (
             <li key={t.name} className={styles.card}>
               <figure>

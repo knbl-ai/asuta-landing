@@ -26,15 +26,25 @@
   object-fit: cover;
 }
 
+/* Soft dark fade behind the caption so white text keeps 3:1 on bright parts of the photo. */
+.photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.5) 0%, rgb(0 0 0 / 0.3) 22%, rgb(0 0 0 / 0) 45%);
+  pointer-events: none;
+}
+
 .caption {
   position: absolute;
+  z-index: 1;
   color: var(--white);
   font-weight: 700;
   font-size: 1.937rem;
   line-height: 1.8695rem;
   letter-spacing: -0.03em;
   text-align: center;
-  text-shadow: 0 0 0.65rem rgb(0 0 0 / 0.42);
+  text-shadow: 0 0 0.65rem rgb(0 0 0 / 0.6);
   white-space: nowrap;
 }
 
@@ -170,7 +180,7 @@
   .caption {
     font-size: 4.05rem;
     line-height: 3.909rem;
-    text-shadow: 0 0 1.35rem rgb(0 0 0 / 0.42);
+    text-shadow: 0 0 1.35rem rgb(0 0 0 / 0.6);
   }
 
   .captionUs {

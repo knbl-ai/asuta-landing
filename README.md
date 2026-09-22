@@ -95,7 +95,6 @@ Import the repository in Vercel and set the environment variables above (`SF_MOD
 
 ## Open items
 
-- Social links and the privacy / terms pages (`lib/site.js` has `#` placeholders).
 - The production Salesforce org id and GCLID field id.
 - The card photos in the design are stock previews with "Magnific" watermarks. They need to be
   replaced with licensed images before launch (`assets/images/card-*`).

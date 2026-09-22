@@ -61,12 +61,18 @@ export default function ContactFooter() {
             {' | '}
           </span>
           <br className="br-mobile" />
-          <a href={LEGAL.privacy}>מדיניות פרטיות</a>
+          <a href={LEGAL.privacy} target="_blank" rel="noopener noreferrer">
+            מדיניות פרטיות
+            <span className="sr-only"> (נפתח בחלון חדש)</span>
+          </a>
           <span className={styles.legalSep} aria-hidden="true">
             &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{' '}
           </span>
           <span className={styles.legalJoin}> </span>
-          <a href={LEGAL.terms}>ותנאי שימוש</a>
+          <a href={LEGAL.terms} target="_blank" rel="noopener noreferrer">
+            ותנאי שימוש
+            <span className="sr-only"> (נפתח בחלון חדש)</span>
+          </a>
           <span className={styles.copySep} aria-hidden="true">
             {' | '}
           </span>

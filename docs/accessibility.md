@@ -98,6 +98,4 @@ description (1.2.x) apply only to video, of which the site has none.
 1. **Accessibility coordinator details.** `lib/accessibility.js` holds `{{ }}`
    placeholders for name, email and phone. The statement page shows a visible warning
    until they are filled. **Required before launch.**
-2. **Placeholder links.** Social links and the privacy / terms pages are `#`
-   (`lib/site.js`). A link that goes nowhere is itself an accessibility defect.
-3. **Screen-reader pass** by hand, as above.
+2. **Screen-reader pass** by hand, as above.

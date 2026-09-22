@@ -119,6 +119,57 @@
   white-space: nowrap;
 }
 
+/* Carousel arrows. Mobile: over the peeking neighbour cards. */
+.arrow {
+  position: absolute;
+  top: 18.45rem;
+  z-index: 1;
+  width: 4.4rem;
+  height: 4.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.92);
+  box-shadow: 0 0.2rem 0.8rem rgb(30 60 149 / 0.18);
+  color: var(--maccabi);
+  cursor: pointer;
+  transition: opacity 0.2s, background-color 0.2s;
+}
+
+.arrow svg {
+  width: 1.1rem;
+  height: 2.6rem;
+}
+
+.arrow path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.arrow:hover:not(:disabled) {
+  background: var(--maccabi);
+  color: var(--white);
+}
+
+.arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.arrowPrev {
+  right: 0.6rem;
+}
+
+.arrowNext {
+  left: 0.6rem;
+}
+
 /* Desktop (1600pt frame). Section starts at design y=2000 */
 @media (min-width: 1100px) {
   .frame {
@@ -132,35 +183,51 @@
     font-size: 3.8rem;
   }
 
+  /* Desktop: the four cards of the design, as a carousel that only scrolls
+     (and only shows arrows) when there are more cards than fit. */
   .cards {
-    position: static;
-    display: block;
+    left: 5.68rem;
+    top: 11.83rem;
+    width: 148.62rem;
+    gap: 3.51rem;
     padding: 0;
-    overflow: visible;
+    scroll-snap-type: x mandatory;
   }
 
   .card {
-    position: absolute;
-    top: 11.83rem;
-    width: 34.52rem;
+    flex-basis: 34.52rem;
     height: 33.69rem;
     border-radius: 1rem;
-  }
-
-  .card:nth-child(1) {
-    left: 119.78rem;
+    scroll-snap-align: start;
   }
 
   .card:nth-child(2) {
-    left: 81.74rem;
+    order: 0;
   }
 
-  .card:nth-child(3) {
-    left: 43.71rem;
+  .arrow {
+    top: 26.48rem;
+    width: 4.4rem;
+    height: 4.4rem;
+    background: transparent;
+    box-shadow: none;
   }
 
-  .card:nth-child(4) {
-    left: 5.68rem;
+  .arrow svg {
+    width: 1.3rem;
+    height: 3.57rem;
+  }
+
+  .arrow path {
+    stroke-width: 2;
+  }
+
+  .arrowPrev {
+    right: 0.65rem;
+  }
+
+  .arrowNext {
+    left: 0.65rem;
   }
 
   .arcDesktop {
@@ -173,6 +240,7 @@
 
   .mark {
     top: 2.37rem;
+    right: 2.98rem;
     font-size: 19.585rem;
   }
 

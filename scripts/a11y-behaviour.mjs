@@ -249,6 +249,35 @@ for (const width of [1600, 375]) {
   await ctx.close();
 }
 
+// ---------- testimonials carousel arrows ----------
+{
+  const ctx = await browser.newContext({ viewport: { width: 375, height: 800 } });
+  const page = await ctx.newPage();
+  await page.goto(BASE, { waitUntil: 'networkidle' });
+  const next = page.locator('button[aria-controls="testimonials-list"][aria-label="ההמלצה הבאה"]');
+  const before = await page.evaluate(() => document.getElementById('testimonials-list').scrollLeft);
+  await next.focus();
+  await page.keyboard.press('Enter');
+  await page.waitForTimeout(800);
+  const after = await page.evaluate(() => document.getElementById('testimonials-list').scrollLeft);
+  check('mobile: "next" arrow moves the carousel by keyboard', after < before - 50, `scrollLeft ${Math.round(before)} -> ${Math.round(after)}`);
+  await ctx.close();
+
+  const dctx = await browser.newContext({ viewport: { width: 1600, height: 900 } });
+  const dpage = await dctx.newPage();
+  await dpage.goto(BASE, { waitUntil: 'networkidle' });
+  const r = await dpage.evaluate(() => {
+    const ul = document.getElementById('testimonials-list');
+    return {
+      cards: ul.children.length,
+      overflow: ul.scrollWidth > ul.clientWidth + 1,
+      arrows: document.querySelectorAll('button[aria-controls="testimonials-list"]').length,
+    };
+  });
+  check('desktop: arrows shown only when cards overflow', r.arrows === (r.overflow ? 2 : 0), `${r.cards} cards, ${r.arrows} arrows`);
+  await dctx.close();
+}
+
 // ---------- reflow (WCAG 1.4.10) ----------
 for (const width of [320, 375]) {
   const ctx = await browser.newContext({ viewport: { width, height: 800 } });

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './Testimonials.module.css';
 
 const TESTIMONIALS = [
@@ -55,23 +55,65 @@ const TESTIMONIALS = [
   },
 ];
 
-// On mobile every card uses the first card's arc, as in the design.
+// On mobile every card uses the first card's arc, as in the design (also the
+// fallback for testimonials added without an arc of their own).
 const MOBILE_ARC = TESTIMONIALS[0].arc;
+
+// Thin chevron, as drawn in the design file next to the testimonials (13 x 35.7pt).
+function Chevron({ direction }) {
+  return (
+    <svg viewBox="0 0 15 38" aria-hidden="true" focusable="false">
+      <path d={direction === 'left' ? 'M14 1L1.5 19L14 37' : 'M1 1L13.5 19L1 37'} />
+    </svg>
+  );
+}
 
 export default function Testimonials() {
   const scroller = useRef(null);
+  // Arrows exist only while there is more than fits, so they appear on desktop by
+  // themselves once a fifth testimonial is added.
+  const [nav, setNav] = useState({ overflow: false, prev: false, next: false });
 
-  // Mobile carousel: start with the first testimonial centred, its neighbours peeking in.
+  const update = useCallback(() => {
+    const el = scroller.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    const pos = Math.abs(el.scrollLeft); // RTL: scrollLeft runs from 0 to negative
+    const overflow = max > 1;
+    // A scrollable region must be reachable by keyboard (arrow keys scroll it once focused).
+    if (overflow) el.tabIndex = 0;
+    else el.removeAttribute('tabindex');
+    setNav({ overflow, prev: overflow && pos > 1, next: overflow && pos < max - 1 });
+  }, []);
+
   useEffect(() => {
     const el = scroller.current;
-    if (!el || getComputedStyle(el).overflowX !== 'auto') return;
-    // A scrollable region must be reachable by keyboard (arrow keys scroll it once focused).
-    el.tabIndex = 0;
-    const first = el.querySelector('li');
-    const a = first.getBoundingClientRect();
-    const b = el.getBoundingClientRect();
-    el.scrollBy({ left: a.left + a.width / 2 - (b.left + b.width / 2), behavior: 'instant' });
-  }, []);
+    if (!el) return;
+    // Mobile: start with the first testimonial centred, its neighbours peeking in.
+    if (window.matchMedia('(max-width: 1099.98px)').matches) {
+      const first = el.querySelector('li');
+      const a = first.getBoundingClientRect();
+      const b = el.getBoundingClientRect();
+      el.scrollBy({ left: a.left + a.width / 2 - (b.left + b.width / 2), behavior: 'instant' });
+    }
+    update();
+    el.addEventListener('scroll', update, { passive: true });
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener('scroll', update);
+      ro.disconnect();
+    };
+  }, [update]);
+
+  // One card per click. In RTL the next card is to the left.
+  const go = (dir) => {
+    const el = scroller.current;
+    const card = el.querySelector('li');
+    const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.a11yMotion === 'off';
+    el.scrollBy({ left: (dir === 'next' ? -1 : 1) * (card.offsetWidth + gap), behavior: reduce ? 'instant' : 'smooth' });
+  };
 
   return (
     <section className={styles.section} id="testimonials" aria-labelledby="testimonials-title">
@@ -79,12 +121,12 @@ export default function Testimonials() {
         <h2 id="testimonials-title" className={styles.title}>
           המטופלים שלנו אומרים תודה
         </h2>
-        <ul className={styles.cards} ref={scroller} aria-label="המלצות מטופלים">
+        <ul className={styles.cards} id="testimonials-list" ref={scroller} aria-label="המלצות מטופלים">
           {TESTIMONIALS.map((t) => (
             <li key={t.name} className={styles.card}>
               <figure>
                 <svg className={`${styles.arc} ${styles.arcDesktop}`} viewBox="0 0 345.2 336.9" aria-hidden="true">
-                  <path d={t.arc} />
+                  <path d={t.arc ?? MOBILE_ARC} />
                 </svg>
                 <svg className={`${styles.arc} ${styles.arcMobile}`} viewBox="0 0 345.2 336.9" aria-hidden="true">
                   <path d={MOBILE_ARC} />
@@ -102,6 +144,30 @@ export default function Testimonials() {
             </li>
           ))}
         </ul>
+        {nav.overflow && (
+          <>
+            <button
+              type="button"
+              className={`${styles.arrow} ${styles.arrowPrev}`}
+              onClick={() => go('prev')}
+              disabled={!nav.prev}
+              aria-controls="testimonials-list"
+              aria-label="ההמלצה הקודמת"
+            >
+              <Chevron direction="right" />
+            </button>
+            <button
+              type="button"
+              className={`${styles.arrow} ${styles.arrowNext}`}
+              onClick={() => go('next')}
+              disabled={!nav.next}
+              aria-controls="testimonials-list"
+              aria-label="ההמלצה הבאה"
+            >
+              <Chevron direction="left" />
+            </button>
+          </>
+        )}
       </div>
     </section>
   );

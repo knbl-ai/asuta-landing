@@ -3,61 +3,56 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './Testimonials.module.css';
 
+// Patient thank-you letters, supplied by Assuta Ashdod.
 const TESTIMONIALS = [
   {
-    quote: (
-      <>
-        הרגשתי בידיים טובות מהרגע הראשון <br className="br-desktop" />- הצוות הסביר כל שלב, היה קשוב{' '}
-        <br className="br-desktop" />
-        ולא מיהר איתי.
-      </>
-    ),
-    name: 'דני אברהם, 58, אשדוד',
-    color: 'maccabi',
-    arc: 'M186.6 -31.8C169 31.8 206.2 97.6 269.8 115.2C333.4 132.9 399.2 95.6 416.8 32.1',
+    name: 'ראובן ואסתר נחום',
+    quote: 'בחוויה שלנו הפסיפס האנושי – מהפקידה בדלפק, דרך האחות ועד למנהלת המחלקה – היה מקצועי, אנושי, חם וקשוב בצורה יוצאת דופן.',
   },
   {
-    quote: (
-      <>
-        הניתוח עצמו והתאוששות אחריו <br className="br-desktop" />
-        התנהלו בצורה מקצועית ורגועה, עם <br className="br-desktop" />
-        ציוד וטכנולוגיה שהרגישו עדכניים <br className="br-desktop" />
-        ומתקדמים.
-      </>
-    ),
-    name: 'מרינה לוי, 39, אשקלון',
-    color: 'turquoise',
-    arc: 'M241.6 378C250.8 312.7 205.2 252.3 139.9 243.1C74.6 233.9 14.2 279.4 5 344.8',
+    name: 'מאירה תיק הנדלס',
+    quote: 'הצוות נמצא פיזית כל הזמן ליד המטופלים ומעניק מענה מיידי עוד לפני שמבקשים... אינכם מעניקים רק טיפול רפואי – אתם מעניקים ביטחון, תקווה, שלווה ואמון.',
   },
   {
-    quote: (
-      <>
-        הרופאה ליוותה אותי לאורך כל התהליך, <br className="br-desktop" />
-        לא רק ברגע הקריטי - הרגשתי שיש לי <br className="br-desktop" />
-        מישהי לפנות אליה בכל שלב.
-      </>
-    ),
-    name: 'שירה מזרחי, 31, באר שבע',
-    color: 'lightBlue',
-    arc: 'M-62.1 15.1C-29.1 72.2 43.9 91.8 101 58.8C158.2 25.8 177.7 -47.2 144.8 -104.3',
+    name: 'אייל גלוצר',
+    quote: 'רציתי להודות על האוזן הקשבת, על הרגישות, ועל המקצועיות בטיפול שקיבלתי באופן אישי.',
   },
   {
-    quote: (
-      <>
-        ילדתנו טופלה במחלקת ילדים <br className="br-desktop" />
-        ברגישות ובחום, <br className="br-desktop" />
-        וזה עשה הבדל גדול עבורנו כהורים.
-      </>
-    ),
-    name: 'אלי פרץ, אשדוד',
-    color: 'maccabi',
-    arc: 'M-40.8 303.9C25.2 303.9 78.7 250.4 78.7 184.5C78.7 118.5 25.2 65 -40.8 65',
+    name: 'יפה ארקליס שדה',
+    quote: 'שמרתם עליי, דאגתם לי וריפאתם אותי... הכל נעשה בשקט, בביטחון, בנועם הליכות וכמובן במקצועיות מלאה. חזרתי לעצמי ואני זוכרת אתכם כחוויה הכי לטובה.',
+  },
+  {
+    name: 'אביבה אדמוני',
+    quote: 'הגעתי חרדתית וחששתי מאוד מההליך, אך הצלחתם להפיג את החששות, להרגיע אותי ולהעניק לי תחושת ביטחון אמיתית. היחס החם והאכפתיות גרמו לי להרגיש כבת בית.',
+  },
+  {
+    name: 'גרגורי טסטר',
+    quote: 'בזכות הטיפול, המקצועיות והאמונה בי – אני עומד על הרגליים והולך בכוחות עצמי. השינוי הזה הוא הרבה מעבר לשיפור רפואי, הוא החזרת העצמאות והתקווה לחיים.',
+  },
+  {
+    name: 'מיכאל דרכלר',
+    quote: 'תודה עמוקה על הטיפול המסור, המקצועי והאנושי ועל הגישה הרפואית המדויקת שקיבלנו.',
+  },
+  {
+    name: 'נורית מור',
+    quote: 'אני ואימי בת ה-81 פגשנו רופא אנושי, אדיב וסבלני שהקשיב והסביר הכל בנחת וברוגע. בזכות ההסבר והשיקוף שלו – תחושת הביטחון שלנו גברה.',
+  },
+  {
+    name: 'אברהם אסרף',
+    quote: 'רציתי להודות לכם על הצוות המיוחד שאתם מעסיקים - בעלי יחסי אנוש מעולים, משרים אווירה נעימה ומקצועיות רבה. תודה רבה לכם!',
   },
 ];
 
-// On mobile every card uses the first card's arc, as in the design (also the
-// fallback for testimonials added without an arc of their own).
-const MOBILE_ARC = TESTIMONIALS[0].arc;
+// The four card styles of the design (quote-mark colour + background arc), repeated in order.
+const CARD_STYLES = [
+  { color: 'maccabi', arc: 'M186.6 -31.8C169 31.8 206.2 97.6 269.8 115.2C333.4 132.9 399.2 95.6 416.8 32.1' },
+  { color: 'turquoise', arc: 'M241.6 378C250.8 312.7 205.2 252.3 139.9 243.1C74.6 233.9 14.2 279.4 5 344.8' },
+  { color: 'lightBlue', arc: 'M-62.1 15.1C-29.1 72.2 43.9 91.8 101 58.8C158.2 25.8 177.7 -47.2 144.8 -104.3' },
+  { color: 'maccabi', arc: 'M-40.8 303.9C25.2 303.9 78.7 250.4 78.7 184.5C78.7 118.5 25.2 65 -40.8 65' },
+];
+
+// On mobile every card uses the first card's arc, as in the design.
+const MOBILE_ARC = CARD_STYLES[0].arc;
 
 // Thin chevron, as drawn in the design file next to the testimonials (13 x 35.7pt).
 function Chevron({ direction }) {
@@ -91,6 +86,8 @@ export default function Testimonials() {
     if (!el) return;
     // Mobile: start with the first testimonial centred, its neighbours peeking in.
     if (window.matchMedia('(max-width: 1099.98px)').matches) {
+      // Absolute, not relative: the effect can run twice (React Strict Mode in dev).
+      el.scrollTo({ left: 0, behavior: 'instant' });
       const first = el.querySelector('li');
       const a = first.getBoundingClientRect();
       const b = el.getBoundingClientRect();
@@ -122,27 +119,30 @@ export default function Testimonials() {
           המטופלים שלנו אומרים תודה
         </h2>
         <ul className={styles.cards} id="testimonials-list" ref={scroller} aria-label="המלצות מטופלים">
-          {TESTIMONIALS.map((t) => (
-            <li key={t.name} className={styles.card}>
-              <figure>
-                <svg className={`${styles.arc} ${styles.arcDesktop}`} viewBox="0 0 345.2 336.9" aria-hidden="true">
-                  <path d={t.arc ?? MOBILE_ARC} />
-                </svg>
-                <svg className={`${styles.arc} ${styles.arcMobile}`} viewBox="0 0 345.2 336.9" aria-hidden="true">
-                  <path d={MOBILE_ARC} />
-                </svg>
-                <span className={`${styles.mark} ${styles[t.color]}`} aria-hidden="true">
-                  &quot;
-                </span>
-                <blockquote className={styles.quote}>
-                  <p>{t.quote}</p>
-                </blockquote>
-                <figcaption className={styles.footer}>
-                  <span className={styles.name}>{t.name}</span>
-                </figcaption>
-              </figure>
-            </li>
-          ))}
+          {TESTIMONIALS.map((t, i) => {
+            const look = CARD_STYLES[i % CARD_STYLES.length];
+            return (
+              <li key={t.name} className={styles.card}>
+                <figure>
+                  <svg className={`${styles.arc} ${styles.arcDesktop}`} viewBox="0 0 345.2 336.9" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
+                    <path d={look.arc} />
+                  </svg>
+                  <svg className={`${styles.arc} ${styles.arcMobile}`} viewBox="0 0 345.2 336.9" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
+                    <path d={MOBILE_ARC} />
+                  </svg>
+                  <span className={`${styles.mark} ${styles[look.color]}`} aria-hidden="true">
+                    &quot;
+                  </span>
+                  <blockquote className={styles.quote}>
+                    <p>{t.quote}</p>
+                  </blockquote>
+                  <figcaption className={styles.footer}>
+                    <span className={styles.name}>{t.name}</span>
+                  </figcaption>
+                </figure>
+              </li>
+            );
+          })}
         </ul>
         {nav.overflow && (
           <>

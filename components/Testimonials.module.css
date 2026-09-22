@@ -1,6 +1,7 @@
 /* Mobile (375pt frame). Section starts at design y=2960 */
 .frame {
-  height: 38rem;
+  /* Taller than the design (38rem): the real quotes run up to 7 lines on mobile. */
+  height: 44.5rem;
 }
 
 .title {
@@ -36,7 +37,7 @@
 .card {
   position: relative;
   flex: 0 0 24.5rem;
-  height: 23.91rem;
+  height: 30.4rem;
   border-radius: 0.71rem;
   overflow: hidden;
   background: var(--grey);
@@ -103,7 +104,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 17.62rem;
+  top: 24.11rem;
   bottom: 0;
   background: rgb(255 255 255 / 0.59);
 }
@@ -122,7 +123,7 @@
 /* Carousel arrows. Mobile: over the peeking neighbour cards. */
 .arrow {
   position: absolute;
-  top: 18.45rem;
+  top: 21.74rem;
   z-index: 1;
   width: 4.4rem;
   height: 4.4rem;
@@ -266,7 +267,6 @@
     width: 29.8rem;
     font-size: 1.8rem;
     line-height: 2.16rem;
-    white-space: nowrap;
   }
 
   .footer {

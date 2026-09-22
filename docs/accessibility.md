@@ -64,7 +64,7 @@ Needs a production server (`npm run build && npm run start`):
 
 ```bash
 npm run a11y             # axe-core, 15 scans (3 routes x 2 widths x up to 4 states) — clean
-npm run a11y:behaviour   # keyboard, dialogs, panel, marquee, forms, reflow — 35/35
+npm run a11y:behaviour   # keyboard, dialogs, panel, marquee, carousel, forms, reflow — 37/37
 npm run lint             # 31 jsx-a11y rules (eslint-config-next enables only a few)
 ```
 

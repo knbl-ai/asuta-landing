@@ -14,7 +14,7 @@ export default function ContactFooter() {
         <h2 className={styles.title}>אנחנו כאן בשבילכם.</h2>
         <p className={styles.text}>
           הצוותים שלנו עומדים לרשותכם כדי לספק מידע, לכוון אתכם <br className="br-desktop" />
-          לשירות או למומחה המתאימה לכם ולסייע לכם בתהליך בצורה פשוטה, <br className="br-desktop" />
+          לשירות או למומחה המתאימים לכם ולסייע לכם בתהליך בצורה פשוטה, <br className="br-desktop" />
           נגישה ומקצועית. <br className="br-mobile" />
           כשלא תמיד ברור מה הצעד הבא, חשוב לדעת <br className="br-desktop" />
           שיש מי שיכול לעזור לכם למצוא את הדרך.

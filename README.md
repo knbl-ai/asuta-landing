@@ -82,10 +82,6 @@ hero/footer gradient is darker (`#15809A` instead of `#1A94B2`), and the hero ph
 a soft dark fade behind their captions. The mobile footer is 33px taller for the
 accessibility statement link.
 
-**Before launch:** fill in the accessibility coordinator's name, email and phone in
-`lib/accessibility.js`. They are `{{ }}` placeholders, and the statement page
-(`/accessibility`) shows a warning until they are replaced.
-
 See [`docs/accessibility.md`](docs/accessibility.md) for the measurements, implementation
 notes and open items.
 
@@ -98,4 +94,3 @@ Import the repository in Vercel and set the environment variables above (`SF_MOD
 - The production Salesforce org id and GCLID field id.
 - The card photos in the design are stock previews with "Magnific" watermarks. They need to be
   replaced with licensed images before launch (`assets/images/card-*`).
-- The accessibility coordinator's contact details (`lib/accessibility.js`).

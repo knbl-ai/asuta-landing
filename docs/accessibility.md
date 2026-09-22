@@ -39,7 +39,8 @@ had a widget installed. Compliance rests on the markup below.
 | — | "נפתח בחלון חדש" announced on links that open a new window |
 
 Plus `/accessibility`, the statement page (הצהרת נגישות), linked from the footer of every
-page and from the panel.
+page and from the panel. Accessibility enquiries go to the hospital's public phone
+numbers; no named accessibility coordinator is listed.
 
 ## Contrast fixes
 
@@ -95,7 +96,4 @@ description (1.2.x) apply only to video, of which the site has none.
 
 ## Open items
 
-1. **Accessibility coordinator details.** `lib/accessibility.js` holds `{{ }}`
-   placeholders for name, email and phone. The statement page shows a visible warning
-   until they are filled. **Required before launch.**
-2. **Screen-reader pass** by hand, as above.
+1. **Screen-reader pass** by hand, as above.

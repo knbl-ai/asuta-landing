@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Header from '@/components/Header';
-import { statement as s, statementHasPlaceholders } from '@/lib/accessibility';
+import { statement as s } from '@/lib/accessibility';
+import { PHONES } from '@/lib/site';
 import styles from './page.module.css';
 
 export const metadata = {
@@ -15,8 +16,6 @@ export const metadata = {
  * real headings, real lists and generous type.
  */
 export default function AccessibilityPage() {
-  const pending = statementHasPlaceholders(s);
-
   const section = (title, children) => (
     <section className={styles.section}>
       <h2>{title}</h2>
@@ -69,17 +68,15 @@ export default function AccessibilityPage() {
             <p className={styles.para}>{s.contactIntro}</p>
             {/* A definition list conveys the label/value pairing structurally. */}
             <dl className={styles.contact}>
-              <dt>{s.coordinatorLabel}</dt>
-              <dd>{s.coordinatorName}</dd>
-              <dt>{s.emailLabel}</dt>
-              <dd>{s.email}</dd>
-              <dt>{s.phoneLabel}</dt>
-              <dd>{s.phone}</dd>
+              <dt>{s.callCenterLabel}</dt>
+              <dd>
+                <a href={`tel:${PHONES.callCenter.tel}`}>{PHONES.callCenter.label}</a>
+              </dd>
+              <dt>{s.hospitalLabel}</dt>
+              <dd>
+                <a href={`tel:${PHONES.hospital.tel}`}>{PHONES.hospital.label}</a>
+              </dd>
             </dl>
-            {pending && (
-              /* Visible on purpose: the page is legally required to name a reachable person. */
-              <p className={styles.warning}>לתשומת לב מנהלי האתר: יש להשלים את פרטי רכז/ת הנגישות לפני העלאת האתר לאוויר.</p>
-            )}
           </>,
         )}
       </main>

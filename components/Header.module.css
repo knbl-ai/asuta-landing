@@ -1,13 +1,13 @@
 /* Mobile (375pt frame) */
 .frame {
-  height: 15.93rem;
+  height: 11.7rem;
 }
 
 .brand {
   position: absolute;
-  /* Logo is 70% of the design size (client request), centred in the header */
+  /* Logo is 70% of the design size, with less space above it (client request) */
   left: 12.33rem;
-  top: 4.76rem;
+  top: 2rem;
   width: 12.85rem;
   height: 6.3rem;
 }
@@ -127,13 +127,13 @@
 /* Desktop (1600pt frame) */
 @media (min-width: 1100px) {
   .frame {
-    height: 26.04rem;
+    height: 18.85rem;
   }
 
-  /* 70% of the design size, right edge and bottom (tagline on the nav line) kept */
+  /* 70% of the design size, header tightened; tagline stays on the nav line */
   .brand {
     left: 132.97rem;
-    top: 10.19rem;
+    top: 3rem;
     width: 21.57rem;
     height: 9.8rem;
   }
@@ -160,7 +160,7 @@
 
   .navLink {
     position: absolute;
-    top: 17.79rem;
+    top: 10.6rem;
     font-size: 1.8rem;
     line-height: 1.252;
     color: var(--text-grey);
@@ -170,7 +170,7 @@
 
   .navLink:nth-child(1) {
     left: 71.05rem;
-    top: 17.68rem;
+    top: 10.49rem;
     width: 8.7rem;
   }
 
@@ -191,7 +191,7 @@
   .cta {
     position: absolute;
     left: 5.8rem;
-    top: 15.95rem;
+    top: 8.76rem;
     width: 25.55rem;
     height: 4.3rem;
     display: flex;

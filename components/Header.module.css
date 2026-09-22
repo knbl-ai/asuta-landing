@@ -5,27 +5,28 @@
 
 .brand {
   position: absolute;
-  left: 9.56rem;
-  top: 3.95rem;
-  width: 18.35rem;
-  height: 9rem;
+  /* Logo is 70% of the design size (client request), centred in the header */
+  left: 12.33rem;
+  top: 4.76rem;
+  width: 12.85rem;
+  height: 6.3rem;
 }
 
 .logo {
   position: absolute;
   left: 0.01rem;
   top: 0;
-  width: 18.341rem;
+  width: 12.839rem;
   height: auto;
 }
 
 .tagline {
   position: absolute;
   left: 0;
-  top: 6.58rem;
-  width: 18.25rem;
+  top: 4.606rem;
+  width: 12.775rem;
   color: var(--maccabi);
-  font-size: 1.74rem;
+  font-size: 1.218rem;
   line-height: 1.252;
   letter-spacing: -0.01em;
   white-space: nowrap;
@@ -129,22 +130,23 @@
     height: 26.04rem;
   }
 
+  /* 70% of the design size, right edge and bottom (tagline on the nav line) kept */
   .brand {
-    left: 123.73rem;
-    top: 5.78rem;
-    width: 30.81rem;
-    height: 14rem;
+    left: 132.97rem;
+    top: 10.19rem;
+    width: 21.57rem;
+    height: 9.8rem;
   }
 
   .logo {
     left: 0.01rem;
-    width: 30.805rem;
+    width: 21.564rem;
   }
 
   .tagline {
-    top: 11.05rem;
-    width: 30.65rem;
-    font-size: 2.922rem;
+    top: 7.735rem;
+    width: 21.455rem;
+    font-size: 2.045rem;
   }
 
   .burger,

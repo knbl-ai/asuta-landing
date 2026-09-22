@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+.vercel/
+.env
+.env*.local
+leads.dev.log
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+
+# Design sources and earlier CRM experiments stay local
+ASUTA_LandingPage_source_materials/
+test/
+test_support_files/

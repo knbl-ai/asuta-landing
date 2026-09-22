@@ -1,0 +1,212 @@
+/* Mobile (375pt frame). Section starts at design y=2960 */
+.frame {
+  height: 38rem;
+}
+
+.title {
+  position: absolute;
+  left: 3.36rem;
+  top: 2.59rem;
+  width: 33.14rem;
+  color: var(--maccabi);
+  font-size: 2.6rem;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* Mobile: swipeable carousel, one card centred with its neighbours peeking in. */
+.cards {
+  position: absolute;
+  left: 0;
+  top: 8.74rem;
+  width: 37.5rem;
+  display: flex;
+  gap: 1.75rem;
+  padding-inline: 6.5rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.cards::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  position: relative;
+  flex: 0 0 24.5rem;
+  height: 23.91rem;
+  border-radius: 0.71rem;
+  overflow: hidden;
+  background: var(--grey);
+  scroll-snap-align: center;
+  isolation: isolate;
+}
+
+.card:nth-child(2) {
+  order: -1;
+}
+
+.arc {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.arc path {
+  fill: none;
+  stroke: var(--white);
+  stroke-width: 81;
+  opacity: 0.32;
+}
+
+.arcDesktop {
+  display: none;
+}
+
+.mark {
+  position: absolute;
+  top: 1.69rem;
+  right: 2.11rem;
+  font-family: var(--font-quote), serif;
+  font-size: 13.899rem;
+  line-height: 1.0571;
+}
+
+.maccabi {
+  color: var(--maccabi);
+}
+
+.turquoise {
+  color: var(--turquoise);
+}
+
+.lightBlue {
+  color: var(--light-blue);
+}
+
+.quote {
+  position: absolute;
+  left: 1.68rem;
+  top: 9.26rem;
+  width: 21.15rem;
+  font-size: 1.6rem;
+  line-height: 1.92rem;
+  text-align: center;
+  color: var(--text-grey);
+}
+
+.footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 17.62rem;
+  bottom: 0;
+  background: rgb(255 255 255 / 0.59);
+}
+
+.name {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 2.6rem;
+  font-size: 1.1355rem;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Desktop (1600pt frame). Section starts at design y=2000 */
+@media (min-width: 1100px) {
+  .frame {
+    height: 55.66rem;
+  }
+
+  .title {
+    left: 105.41rem;
+    top: 3.15rem;
+    width: 48.44rem;
+    font-size: 3.8rem;
+  }
+
+  .cards {
+    position: static;
+    display: block;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .card {
+    position: absolute;
+    top: 11.83rem;
+    width: 34.52rem;
+    height: 33.69rem;
+    border-radius: 1rem;
+  }
+
+  .card:nth-child(1) {
+    left: 119.78rem;
+  }
+
+  .card:nth-child(2) {
+    left: 81.74rem;
+  }
+
+  .card:nth-child(3) {
+    left: 43.71rem;
+  }
+
+  .card:nth-child(4) {
+    left: 5.68rem;
+  }
+
+  .arcDesktop {
+    display: block;
+  }
+
+  .arcMobile {
+    display: none;
+  }
+
+  .mark {
+    top: 2.37rem;
+    font-size: 19.585rem;
+  }
+
+  .card:nth-child(1) .mark {
+    right: 2.98rem;
+  }
+
+  .card:nth-child(2) .mark {
+    right: 2.67rem;
+  }
+
+  .card:nth-child(3) .mark {
+    right: 2.36rem;
+  }
+
+  .card:nth-child(4) .mark {
+    right: 3.48rem;
+  }
+
+  .quote {
+    left: 2.36rem;
+    top: 13.03rem;
+    width: 29.8rem;
+    font-size: 1.8rem;
+    line-height: 2.16rem;
+    white-space: nowrap;
+  }
+
+  .footer {
+    top: 24.82rem;
+  }
+
+  .name {
+    top: 3.66rem;
+    font-size: 1.6rem;
+  }
+}

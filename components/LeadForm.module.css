@@ -1,0 +1,241 @@
+/* Positions are relative to the contact section frame. Mobile: section starts at design y=3340 */
+.title {
+  position: absolute;
+  left: 14.88rem;
+  top: 29.63rem;
+  width: 19.62rem;
+  color: var(--white);
+  font-size: 1.6rem;
+  white-space: nowrap;
+}
+
+.field {
+  position: absolute;
+  left: 3.16rem;
+  width: 31.3rem;
+  height: 3.09rem;
+  margin: 0;
+  padding: 0 1.1rem 0 1.1rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--grey);
+  color: var(--text-grey);
+  font-size: 1.4rem;
+  line-height: 3.09rem;
+  text-align: right;
+  outline: none;
+  appearance: none;
+}
+
+.field::placeholder {
+  color: var(--text-grey);
+  opacity: 1;
+}
+
+.field:focus-visible {
+  box-shadow: inset 0 0 0 0.2rem var(--maccabi);
+}
+
+.field[aria-invalid='true'] {
+  box-shadow: inset 0 0 0 0.2rem #d91f4c;
+}
+
+.name {
+  top: 32.58rem;
+}
+
+.phone {
+  top: 36.66rem;
+  direction: rtl;
+}
+
+.select {
+  top: 40.74rem;
+  cursor: pointer;
+  padding-left: 3rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23646464' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 1.1rem center;
+  background-size: 1.1rem auto;
+}
+
+.select option {
+  color: #1f2a44;
+}
+
+.honeypot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkbox {
+  position: absolute;
+  left: 33.41rem;
+  top: 47.63rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin: 0;
+  border: 0;
+  background: var(--grey);
+  appearance: none;
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+}
+
+.checkbox::after {
+  content: '';
+  width: 0.35rem;
+  height: 0.6rem;
+  margin-top: -0.12rem;
+  border: solid var(--maccabi);
+  border-width: 0 0.16rem 0.16rem 0;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+
+.checkbox:checked::after {
+  opacity: 1;
+}
+
+.checkbox:focus-visible {
+  outline: 0.2rem solid var(--white);
+  outline-offset: 0.2rem;
+}
+
+.checkbox[aria-invalid='true'] {
+  box-shadow: 0 0 0 0.2rem #d91f4c;
+}
+
+.terms {
+  position: absolute;
+  left: 5.75rem;
+  top: 47.09rem;
+  width: 26.65rem;
+  color: var(--white);
+  font-size: 1.6rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}
+
+.message {
+  position: absolute;
+  left: 3.21rem;
+  top: 49.3rem;
+  width: 31.85rem;
+  color: #ffe1e6;
+  font-size: 1.25rem;
+  line-height: 1.6rem;
+  text-align: center;
+}
+
+.message:empty {
+  display: none;
+}
+
+.submit {
+  position: absolute;
+  left: 3.21rem;
+  top: 52.11rem;
+  width: 31.85rem;
+  height: 4.3rem;
+  padding: 0.2rem 0.8rem 0 0;
+  border: 0.1rem solid var(--white);
+  border-radius: 3.5rem;
+  background: transparent;
+  color: var(--white);
+  font-size: 1.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.submit:hover:not(:disabled) {
+  background: var(--white);
+  color: var(--maccabi);
+}
+
+.submit:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.submit:focus-visible {
+  outline: 0.2rem solid var(--white);
+  outline-offset: 0.3rem;
+}
+
+/* Desktop: section starts at design y=2556.6 */
+@media (min-width: 1100px) {
+  .title {
+    left: 45.75rem;
+    top: 7.28rem;
+    width: 22.08rem;
+    font-size: 1.8rem;
+  }
+
+  .field {
+    left: 9.04rem;
+    width: 58.78rem;
+    border: 0.1rem solid var(--border-grey);
+    font-size: 1.6rem;
+    line-height: 2.89rem;
+    padding: 0 1.09rem;
+  }
+
+  .select {
+    padding-left: 3rem;
+  }
+
+  .name {
+    top: 11.58rem;
+  }
+
+  .phone {
+    top: 15.66rem;
+  }
+
+  .select {
+    top: 19.74rem;
+  }
+
+  .checkbox {
+    left: 67.35rem;
+    top: 28.41rem;
+    border: 0.1rem solid var(--border-grey);
+  }
+
+  .terms {
+    left: 35.45rem;
+    top: 27.86rem;
+    width: 29.98rem;
+    font-size: 1.8rem;
+  }
+
+  .message {
+    left: 9.09rem;
+    top: 30.5rem;
+    width: 58.68rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .submit {
+    left: 9.09rem;
+    top: 35.64rem;
+    width: 58.68rem;
+    padding-right: 0;
+    border-width: 0.2rem;
+  }
+}

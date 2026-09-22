@@ -1,0 +1,148 @@
+/*
+ * Layout system
+ * -------------
+ * The page is a 1:1 build of the InDesign layout (desktop frame 1600pt, mobile frame 375pt).
+ * The root font-size is tied to the viewport so that 1rem = 10 design points:
+ *   - mobile (< 1100px): the 375pt frame fills the screen, capped at 480px wide
+ *   - desktop (>= 1100px): the 1600pt frame fills the screen, capped at 1600px wide
+ * Every measurement in the component styles is therefore "design points / 10" in rem.
+ */
+
+:root {
+  --maccabi: #1e3c95;
+  --turquoise: #1a94b2;
+  --aqua: #99ede0;
+  --light-blue: #b2ccff;
+  --grey: #e5e5e5;
+  --border-grey: #c7c7c7;
+  --text-grey: #646464;
+  --white: #ffffff;
+  /* Sampled from the InDesign gradient (Maccabi blue -> turquoise, midpoint 21.8%) */
+  --brand-gradient: linear-gradient(
+    to top,
+    rgb(30 60 149) 0%,
+    rgb(29 72 153) 5%,
+    rgb(29 83 157) 10%,
+    rgb(29 93 160) 15%,
+    rgb(28 101 163) 20%,
+    rgb(27 116 168) 30%,
+    rgb(27 127 172) 40%,
+    rgb(27 136 174) 50%,
+    rgb(26 142 176) 60%,
+    rgb(26 145 178) 70%,
+    rgb(26 147 178) 80%,
+    rgb(26 148 178) 90%
+  );
+  --dot-gradient: radial-gradient(circle, var(--aqua) 3%, var(--turquoise) 97%);
+  --font-sans-stack: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+html {
+  font-size: calc(min(100vw, 480px) / 37.5);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (min-width: 1100px) {
+  html {
+    font-size: calc(min(100vw, 1600px) / 160);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--text-grey);
+  font-family: var(--font-sans-stack);
+  font-size: 1.6rem;
+  line-height: 1.252;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+figure,
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+img,
+svg {
+  display: block;
+  max-width: none;
+}
+
+/* The design frame: 375pt wide on mobile, 1600pt wide on desktop. */
+.frame {
+  position: relative;
+  width: 37.5rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 1100px) {
+  .frame {
+    width: 160rem;
+  }
+}
+
+/* Line breaks that exist only in one of the two layouts. */
+@media (max-width: 1099.98px) {
+  .br-desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 1100px) {
+  .br-mobile {
+    display: none;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

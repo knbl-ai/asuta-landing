@@ -1,0 +1,212 @@
+/* Mobile (375pt frame) */
+.frame {
+  height: 15.93rem;
+}
+
+.brand {
+  position: absolute;
+  left: 9.56rem;
+  top: 3.95rem;
+  width: 18.35rem;
+  height: 9rem;
+}
+
+.logo {
+  position: absolute;
+  left: 0.01rem;
+  top: 0;
+  width: 18.341rem;
+  height: auto;
+}
+
+.tagline {
+  position: absolute;
+  left: 0;
+  top: 6.58rem;
+  width: 18.25rem;
+  color: var(--maccabi);
+  font-size: 1.74rem;
+  line-height: 1.252;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.tagline b {
+  font-weight: 700;
+}
+
+.nav,
+.cta {
+  display: none;
+}
+
+.burger {
+  position: absolute;
+  left: 32.75rem;
+  top: 0.15rem;
+  width: 4.4rem;
+  height: 4.4rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.31rem;
+}
+
+.burger span {
+  display: block;
+  width: 2.1rem;
+  height: 0.3rem;
+  border-radius: 0.15rem;
+  background: var(--text-grey);
+}
+
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+}
+
+.drawer[hidden] {
+  display: none;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: rgb(30 60 149 / 0.45);
+  cursor: pointer;
+}
+
+.drawerPanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(80vw, 32rem);
+  padding: 8rem 3rem 3rem;
+  background: var(--brand-gradient);
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  color: var(--white);
+  font-size: 2.2rem;
+  animation: slideIn 0.25s ease-out;
+}
+
+.drawerCta {
+  margin-top: 1rem;
+  border: 0.1rem solid var(--white);
+  border-radius: 3.5rem;
+  padding: 1rem 0;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawerPanel {
+    animation: none;
+  }
+}
+
+/* Desktop (1600pt frame) */
+@media (min-width: 1100px) {
+  .frame {
+    height: 26.04rem;
+  }
+
+  .brand {
+    left: 123.73rem;
+    top: 5.78rem;
+    width: 30.81rem;
+    height: 14rem;
+  }
+
+  .logo {
+    left: 0.01rem;
+    width: 30.805rem;
+  }
+
+  .tagline {
+    top: 11.05rem;
+    width: 30.65rem;
+    font-size: 2.922rem;
+  }
+
+  .burger,
+  .drawer {
+    display: none;
+  }
+
+  .nav {
+    display: block;
+  }
+
+  .navLink {
+    position: absolute;
+    top: 17.79rem;
+    font-size: 1.8rem;
+    line-height: 1.252;
+    color: var(--text-grey);
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  .navLink:nth-child(1) {
+    left: 71.05rem;
+    top: 17.68rem;
+    width: 8.7rem;
+  }
+
+  .navLink:nth-child(2) {
+    left: 55.63rem;
+    width: 8.27rem;
+  }
+
+  .navLink:nth-child(3) {
+    left: 38.47rem;
+    width: 10.01rem;
+  }
+
+  .navLink:hover {
+    color: var(--maccabi);
+  }
+
+  .cta {
+    position: absolute;
+    left: 5.8rem;
+    top: 15.95rem;
+    width: 25.55rem;
+    height: 4.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.2rem;
+    border: 0.2rem solid #999999;
+    border-radius: 3.5rem;
+    color: var(--text-grey);
+    font-size: 1.5rem;
+    font-weight: 700;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  }
+
+  .cta:hover {
+    background: var(--maccabi);
+    border-color: var(--maccabi);
+    color: var(--white);
+  }
+}

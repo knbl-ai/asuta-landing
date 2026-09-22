@@ -1,0 +1,268 @@
+/* Mobile (375pt frame). Section starts at design y=3340 */
+.frame {
+  height: 110.2rem;
+  color: var(--white);
+}
+
+.panel {
+  position: absolute;
+  left: 0.98rem;
+  top: 1rem;
+  width: 35.52rem;
+  height: 108.2rem;
+  background: var(--brand-gradient);
+}
+
+.title {
+  position: absolute;
+  left: 10.7rem;
+  top: 4.42rem;
+  width: 23.8rem;
+  font-size: 2.6rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.text {
+  position: absolute;
+  left: 3.11rem;
+  top: 10.08rem;
+  width: 31.4rem;
+  font-size: 1.6rem;
+  line-height: 2.1628rem;
+  font-weight: 500;
+}
+
+.phones {
+  position: absolute;
+  left: 5.71rem;
+  top: 61.24rem;
+  width: 26.18rem;
+  font-size: 1.6rem;
+  line-height: 2.72rem;
+  text-align: center;
+}
+
+.phones a:hover {
+  text-decoration: underline;
+}
+
+.star {
+  font-size: 2rem;
+  line-height: 0;
+}
+
+.sep {
+  display: none;
+}
+
+.social {
+  position: absolute;
+  left: 0;
+  top: 72.56rem;
+  width: 100%;
+  height: 4.3rem;
+}
+
+.social li {
+  position: absolute;
+  top: 0;
+  width: 4.2rem;
+}
+
+.social a {
+  display: block;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.social a:hover {
+  transform: scale(1.08);
+}
+
+.social img {
+  width: 100%;
+  height: auto;
+}
+
+.telegram {
+  left: 27.22rem;
+  width: 4.29rem !important;
+}
+
+.tiktok {
+  left: 22.1rem;
+}
+
+.instagram {
+  left: 16.97rem;
+}
+
+.facebook {
+  left: 11.83rem;
+}
+
+.youtube {
+  left: 6.72rem;
+}
+
+.brand {
+  position: absolute;
+  left: 6.59rem;
+  top: 82.06rem;
+  width: 25.1rem;
+}
+
+.logo {
+  width: 24.97rem;
+  height: auto;
+  margin-left: 0.06rem;
+}
+
+.tagline {
+  position: absolute;
+  left: 0;
+  top: 9.44rem;
+  width: 25.1rem;
+  font-size: 2.3926rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.tagline b {
+  font-weight: 700;
+}
+
+.copyright {
+  position: absolute;
+  left: 5.74rem;
+  top: 101.34rem;
+  width: 25.95rem;
+  font-size: 1.6rem;
+  line-height: 3.32rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.copyright a:hover {
+  text-decoration: underline;
+}
+
+.copySep,
+.legalJoin {
+  display: none;
+}
+
+/* Desktop (1600pt frame). Section starts at design y=2556.6, gradient runs full-bleed */
+@media (min-width: 1100px) {
+  .footer {
+    background: var(--brand-gradient);
+  }
+
+  .frame {
+    height: 66.58rem;
+  }
+
+  .panel {
+    display: none;
+  }
+
+  .title {
+    left: 121.43rem;
+    top: 5.38rem;
+    width: 32.73rem;
+    font-size: 3.575rem;
+  }
+
+  .text {
+    left: 81.2rem;
+    top: 11.0rem;
+    width: 72.96rem;
+    font-size: 2.339rem;
+    line-height: 3.163rem;
+    white-space: nowrap;
+  }
+
+  .phones {
+    left: 106.86rem;
+    top: 27.79rem;
+    width: 47.29rem;
+    line-height: 1.252;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .star {
+    font-size: inherit;
+  }
+
+  .sep {
+    display: inline;
+  }
+
+  .social {
+    top: 34.61rem;
+    height: 5.5rem;
+  }
+
+  .social li {
+    width: 5.3rem;
+  }
+
+  .telegram {
+    left: 148.69rem;
+    width: 5.47rem !important;
+  }
+
+  .tiktok {
+    left: 142.18rem;
+  }
+
+  .instagram {
+    left: 135.65rem;
+  }
+
+  .facebook {
+    left: 129.11rem;
+  }
+
+  .youtube {
+    left: 122.61rem;
+  }
+
+  .brand {
+    left: 122.45rem;
+    top: 45.62rem;
+    width: 31.93rem;
+  }
+
+  .logo {
+    width: 31.767rem;
+    margin-left: 0.08rem;
+  }
+
+  .tagline {
+    top: 12.01rem;
+    width: 31.93rem;
+  }
+
+  .copyright {
+    left: 15.01rem;
+    top: 59.02rem;
+    width: 46.85rem;
+    line-height: 1.252;
+  }
+
+  .copySep {
+    display: inline;
+  }
+
+  .legalSep {
+    display: none;
+  }
+
+  .legalJoin {
+    display: inline;
+  }
+}

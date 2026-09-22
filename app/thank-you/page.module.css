@@ -1,0 +1,117 @@
+/* Built in the landing page's design language (the PDF has no thank-you page). */
+.frame {
+  padding-bottom: 3rem;
+}
+
+.panel {
+  margin-inline: 0.98rem;
+  min-height: 52rem;
+  padding: 6rem 2.5rem 5rem;
+  background: var(--brand-gradient);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.dot {
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 2.4rem;
+  filter: drop-shadow(0 0 0.6rem rgb(255 255 255 / 0.5));
+}
+
+.title {
+  font-size: 5.2rem;
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin-top: 1.4rem;
+  font-size: 1.9rem;
+  text-wrap: balance;
+}
+
+.subtitle b {
+  font-weight: 700;
+}
+
+.text {
+  margin-top: 3rem;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+
+.text a {
+  white-space: nowrap;
+}
+
+.text a:hover {
+  text-decoration: underline;
+}
+
+.cta {
+  margin-top: 4.5rem;
+  width: 24.13rem;
+  height: 4.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.2rem;
+  border: 0.1rem solid var(--white);
+  border-radius: 3.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.cta:hover {
+  background: var(--white);
+  color: var(--maccabi);
+}
+
+.copyright {
+  margin-top: 2.4rem;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+@media (min-width: 1100px) {
+  .frame {
+    padding-bottom: 5rem;
+  }
+
+  .panel {
+    margin-inline: 42.99rem 43.71rem;
+    min-height: 60rem;
+    padding: 9rem 6rem 7rem;
+  }
+
+  .dot {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .title {
+    font-size: 7.034rem;
+  }
+
+  .subtitle {
+    font-size: 4.053rem;
+  }
+
+  .text {
+    font-size: 1.8rem;
+  }
+
+  .cta {
+    border-width: 0.2rem;
+  }
+
+  .copyright {
+    font-size: 1.6rem;
+  }
+}

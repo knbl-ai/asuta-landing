@@ -1,0 +1,249 @@
+/* Mobile (375pt frame). Section starts at design y=159.3 */
+.frame {
+  height: 121.07rem;
+}
+
+.photo {
+  position: absolute;
+  left: 0.98rem;
+  width: 35.52rem;
+  height: 23.48rem;
+  overflow: hidden;
+}
+
+.photoUs {
+  top: 0;
+}
+
+.photoBaby {
+  top: 24.47rem;
+  width: 35.61rem;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.caption {
+  position: absolute;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 1.937rem;
+  line-height: 1.8695rem;
+  letter-spacing: -0.03em;
+  text-align: center;
+  text-shadow: 0 0 0.65rem rgb(0 0 0 / 0.42);
+  white-space: nowrap;
+}
+
+.captionUs {
+  left: 20.14rem;
+  top: 15.35rem;
+  width: 14.33rem;
+}
+
+.captionBaby {
+  left: 1.8rem;
+  top: 18.68rem;
+  width: 14.22rem;
+}
+
+.panel {
+  position: absolute;
+  left: 0.98rem;
+  top: 48.87rem;
+  width: 35.52rem;
+  height: 72.2rem;
+  background: var(--brand-gradient);
+  color: var(--white);
+}
+
+.title {
+  position: absolute;
+  left: 2.07rem;
+  top: 3.648rem;
+  width: 31.93rem;
+  font-size: 3.672rem;
+  line-height: 3.821rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.tagline {
+  position: absolute;
+  left: 11.38rem;
+  top: 12.02rem;
+  width: 22.62rem;
+  font-size: 2.116rem;
+  white-space: nowrap;
+}
+
+.tagline b {
+  font-weight: 700;
+}
+
+.body {
+  position: absolute;
+  left: 1.55rem;
+  width: 32.2rem;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+
+.p1 {
+  top: 18.64rem;
+}
+
+.p2 {
+  top: 35.49rem;
+}
+
+.p3 {
+  top: 51.2rem;
+}
+
+.cta {
+  position: absolute;
+  left: 5.84rem;
+  top: 63.57rem;
+  width: 24.13rem;
+  height: 4.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.2rem;
+  padding-right: 1.3rem;
+  border: 0.1rem solid var(--white);
+  border-radius: 3.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.cta:hover {
+  background: var(--white);
+  color: var(--maccabi);
+}
+
+.curve {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.curveMobile {
+  width: 37.5rem;
+  height: 121.07rem;
+}
+
+.curveDesktop {
+  display: none;
+}
+
+/* Desktop (1600pt frame). Section starts at design y=260.4 */
+@media (min-width: 1100px) {
+  .frame {
+    height: 82.48rem;
+  }
+
+  .photo {
+    top: 0;
+    height: 82.2rem;
+  }
+
+  .photoUs {
+    left: 118.1rem;
+    width: 35.97rem;
+  }
+
+  .photoBaby {
+    left: 5.82rem;
+    width: 35.83rem;
+    height: 82.48rem;
+  }
+
+  .caption {
+    font-size: 4.05rem;
+    line-height: 3.909rem;
+    text-shadow: 0 0 1.35rem rgb(0 0 0 / 0.42);
+  }
+
+  .captionUs {
+    left: 3.01rem;
+    top: 69.72rem;
+    width: 29.96rem;
+  }
+
+  .captionBaby {
+    left: 3.05rem;
+    top: 69.72rem;
+    width: 29.73rem;
+  }
+
+  .panel {
+    left: 42.99rem;
+    top: 0;
+    width: 73.3rem;
+    height: 82.2rem;
+  }
+
+  .title {
+    left: 8.15rem;
+    top: 7.583rem;
+    width: 61.17rem;
+    font-size: 7.034rem;
+    line-height: 7.32rem;
+  }
+
+  .tagline {
+    left: 26.2rem;
+    top: 23.47rem;
+    width: 43.32rem;
+    font-size: 4.053rem;
+  }
+
+  .body {
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    white-space: nowrap;
+  }
+
+  .p1 {
+    left: 4.21rem;
+    top: 32.15rem;
+    width: 65.31rem;
+  }
+
+  .p2 {
+    left: 9.12rem;
+    top: 42.05rem;
+    width: 60.4rem;
+  }
+
+  .p3 {
+    left: 1.52rem;
+    top: 51.96rem;
+    width: 68rem;
+  }
+
+  .cta {
+    left: 44.37rem;
+    top: 64.08rem;
+    border-width: 0.2rem;
+  }
+
+  .curveMobile {
+    display: none;
+  }
+
+  .curveDesktop {
+    display: block;
+    width: 160rem;
+    height: 82.48rem;
+  }
+}

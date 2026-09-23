@@ -73,8 +73,8 @@ Line breaks that exist in only one layout use `<br className="br-desktop" />` / 
 The hero cycles through one slide per medical field every 6 seconds, changing both
 photos and both captions together: נשים ויולדות, אורתופדיה, קרדיולוגיה. The slides are
 listed in `components/Hero.jsx`; add or reorder entries there. `components/HeroRotator.jsx`
-only flips a data attribute, and the rotation stops on the pause button, under
-`prefers-reduced-motion`, and while the tab is in the background.
+only flips a data attribute. The rotation stops under `prefers-reduced-motion`, on the
+accessibility panel's "stop animations" switch, and while the tab is in the background.
 
 ## Accessibility
 

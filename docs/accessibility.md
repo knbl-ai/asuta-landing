@@ -29,7 +29,7 @@ had a widget installed. Compliance rests on the markup below.
 | 2.4.7 Focus Visible | `:focus-visible` ring (Maccabi blue with a white halo, readable on the gradient) |
 | 4.1.2 Name, Role, Value | `aria-expanded` + `aria-controls` on the hamburger, the panel button and the marquee toggle; `role="switch"` + `aria-checked` in the panel |
 | 2.1.2 / 2.4.3 | mobile menu as a real dialog: focus trap, Escape, focus restore, `inert` page behind it, scroll lock, visible close button (`lib/useFocusTrap.js`) |
-| 2.2.2 Pause, Stop, Hide | pause/play buttons for the rotating hero slides (`components/HeroRotator.jsx`) and the moving departments strip (`components/MarqueeToggle.jsx`) |
+| 2.2.2 Pause, Stop, Hide | pause/play button for the moving departments strip (`components/MarqueeToggle.jsx`); the hero rotation is stopped by the panel's "stop animations" switch (the client asked for no control on the hero itself) |
 | 2.3.3 / reduced motion | `prefers-reduced-motion` and the panel switch stop the hero rotation, the strip, the drawer animation and all transitions |
 | 1.4.3 Contrast | gradient and caption fixes, below |
 | 1.4.4 Resize Text | panel text size up to 200% (technique G178) |
@@ -64,7 +64,7 @@ Needs a production server (`npm run build && npm run start`):
 
 ```bash
 npm run a11y             # axe-core, 15 scans (3 routes x 2 widths x up to 4 states) — clean
-npm run a11y:behaviour   # keyboard, dialogs, panel, hero, marquee, carousel, forms, reflow — 42/42
+npm run a11y:behaviour   # keyboard, dialogs, panel, hero, marquee, carousel, forms, reflow — 41/41
 npm run lint             # 31 jsx-a11y rules (eslint-config-next enables only a few)
 ```
 

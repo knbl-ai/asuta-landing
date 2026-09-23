@@ -259,12 +259,12 @@ for (const width of [1600, 375]) {
   await page.waitForTimeout(7000);
   check('hero rotates on its own', (await slide()) !== first, `slide ${first} -> ${await slide()}`);
 
-  const toggle = page.locator('button[aria-label^="עצירת חילופי"]');
-  await toggle.click();
+  // The accessibility panel's switch is the pause mechanism WCAG 2.2.2 asks for.
+  await page.locator('button[aria-controls="a11y-panel"]').click();
+  await page.locator('#a11y-panel button[role="switch"]:has-text("אנימציות")').click();
   const held = await slide();
   await page.waitForTimeout(7000);
-  check('hero pause button stops the rotation', (await slide()) === held, `held on slide ${held}`);
-  check('pause button label reflects its state', (await page.locator('button[aria-label^="הפעלת חילופי"]').count()) === 1);
+  check('"stop animations" holds the hero still', (await slide()) === held, `held on slide ${held}`);
 
   const visible = await page.evaluate(() =>
     [...document.querySelectorAll('section[aria-labelledby="hero-title"] figcaption')]

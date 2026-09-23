@@ -1,21 +1,52 @@
 # Sending leads to a private Google Sheet
 
 While Salesforce is unavailable, leads can be written to a Google Sheet instead — or to
-both at once. The sheet stays **private**: it is shared with one service account, the way
-you would share it with a colleague. Nothing is made public, and no API key travels to the
-visitor's browser.
+both at once.
 
-## Why a service account
+There are two ways to connect the sheet. Both keep it **private** — neither requires
+sharing it publicly, and an API key cannot be used at all, because the Sheets API does not
+accept API keys for writes whatever the sharing settings say.
 
-A Google service account is a robot user with its own e-mail address, for example
-`asuta-leads@my-project.iam.gserviceaccount.com`. The site signs in as that robot with a
-private key held only in the server's environment variables. Access is granted by sharing
-the sheet with that e-mail, and revoked by un-sharing it.
+| | Apps Script web app | Service account |
+|---|---|---|
+| Setup | ~3 minutes, inside the sheet | ~10 minutes, Google Cloud console |
+| Credentials | one URL + a shared secret | a private key to store and rotate |
+| Good for | the interim period until Salesforce is live | a permanent integration |
 
-The alternative — "anyone with the link can edit" plus an API key — makes the sheet
-readable by anyone who guesses the URL. Never do that with people's phone numbers.
+## Option A — Apps Script web app (quickest)
 
-## One-time setup (about 10 minutes)
+1. Open the leads spreadsheet → **Extensions → Apps Script**.
+2. Replace the contents of `Code.gs` with [`docs/apps-script/Code.gs`](apps-script/Code.gs)
+   from this repository.
+3. At the top of the script set `SECRET` to a long random string of your own, for example
+   the output of `openssl rand -hex 16`. Keep it: it goes into the site's environment too.
+4. **Deploy → New deployment → Web app**:
+   - Execute as: **Me**
+   - Who has access: **Anyone**
+   - Deploy, approve the permission prompt, and copy the `/exec` URL.
+
+   "Anyone" means anyone who knows that URL can call the script — not that the spreadsheet
+   is public. The `SECRET` check is what stops a stranger who finds the URL from writing rows.
+5. Set two variables (`.env.local` locally, Vercel's Environment Variables for the site):
+
+```bash
+LEAD_DESTINATION=sheets            # or: both
+GOOGLE_SHEETS_WEBAPP_URL=https://script.google.com/macros/s/AKfy…/exec
+GOOGLE_SHEETS_WEBAPP_TOKEN=<the same SECRET>
+```
+
+6. Check it, which appends one test row:
+
+```bash
+npm run sheets:check
+```
+
+To change the script later, edit it and use **Deploy → Manage deployments → Edit → New
+version**; editing alone does not update the live URL.
+
+## Option B — service account
+
+Use this for a permanent setup, or if a script deployment is not acceptable.
 
 ### 1. Create the sheet
 
@@ -49,10 +80,6 @@ readable by anyone who guesses the URL. Never do that with people's phone number
 
 ### 4. Configure the site
 
-From the JSON file you need two values: `client_email` and `private_key`.
-
-Locally, in `.env.local`:
-
 ```bash
 LEAD_DESTINATION=sheets          # or: both
 GOOGLE_SHEETS_ID=1AbC…xyz
@@ -62,17 +89,10 @@ GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nMIIEvQIBADAN…\n-----END PRIVA
 ```
 
 Copy `private_key` from the JSON exactly as it appears there, with the `\n` sequences and
-the surrounding quotes.
+the surrounding quotes. On Vercel the key can also be pasted with real line breaks.
+`npm run sheets:check` verifies it the same way.
 
-Then check it, which appends one test row:
-
-```bash
-npm run sheets:check
-```
-
-On Vercel, add the same five variables under **Settings → Environment Variables** for
-Production and Preview, then redeploy. In the Vercel dialog the key can be pasted with
-real line breaks; `\n` also works.
+If both transports are configured, the web app wins.
 
 ## Switching destinations
 

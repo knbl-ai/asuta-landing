@@ -41,7 +41,8 @@ Open `http://localhost:3000/?gclid=TEST12345` to check that the GCLID is capture
 | `SF_GCLID_FIELD` | Custom Lead field id for the GCLID (UAT: `00NWl000000Q9E9`) |
 | `SF_DEBUG` / `SF_DEBUG_EMAIL` | Salesforce debug mode (emails a field-mapping report). Never enable in production |
 | `LEAD_DESTINATION` | `salesforce` (default), `sheets` or `both` |
-| `GOOGLE_SHEETS_ID` / `GOOGLE_SHEETS_TAB` | The private sheet leads are appended to |
+| `GOOGLE_SHEETS_WEBAPP_URL` / `GOOGLE_SHEETS_WEBAPP_TOKEN` | Apps Script web app bound to the leads sheet (quickest setup) |
+| `GOOGLE_SHEETS_ID` / `GOOGLE_SHEETS_TAB` | The private sheet, when using a service account instead |
 | `GOOGLE_SERVICE_ACCOUNT_EMAIL` / `GOOGLE_PRIVATE_KEY` | Service account the sheet is shared with |
 
 The production org id and GCLID field id still need to be confirmed with Assuta.

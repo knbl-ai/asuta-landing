@@ -23,6 +23,7 @@ npm run lint             # ESLint with the full jsx-a11y ruleset
 # accessibility checks, against a production server (npm run build && npm run start)
 npm run a11y             # axe-core over every route x width x interactive state
 npm run a11y:behaviour   # keyboard, dialogs, panel, marquee, forms, reflow
+npm run sheets:check     # appends one test row to the configured Google Sheet
 ```
 
 In mock mode every lead is printed to the console and appended to `leads.dev.log`.
@@ -39,6 +40,9 @@ Open `http://localhost:3000/?gclid=TEST12345` to check that the GCLID is capture
 | `SF_OID` | Salesforce org id (UAT: `00D7E000000FWtK`) |
 | `SF_GCLID_FIELD` | Custom Lead field id for the GCLID (UAT: `00NWl000000Q9E9`) |
 | `SF_DEBUG` / `SF_DEBUG_EMAIL` | Salesforce debug mode (emails a field-mapping report). Never enable in production |
+| `LEAD_DESTINATION` | `salesforce` (default), `sheets` or `both` |
+| `GOOGLE_SHEETS_ID` / `GOOGLE_SHEETS_TAB` | The private sheet leads are appended to |
+| `GOOGLE_SERVICE_ACCOUNT_EMAIL` / `GOOGLE_PRIVATE_KEY` | Service account the sheet is shared with |
 
 The production org id and GCLID field id still need to be confirmed with Assuta.
 
@@ -53,6 +57,10 @@ The production org id and GCLID field id still need to be confirmed with Assuta.
    - phone → `phone`, normalised to digits (`+972` → `0`)
    - medical field → `description` (`תחום רפואי: …`)
    - gclid → `SF_GCLID_FIELD`
+Where the lead goes is `LEAD_DESTINATION`: `salesforce` (default), `sheets`, or `both`
+while one of them is being set up. See [`docs/google-sheets.md`](docs/google-sheets.md) for
+the Google Sheet setup and `npm run sheets:check` to verify it.
+
 4. On success the browser goes to `/thank-you` (a clean URL for the Google Ads conversion; noindex).
 
 ## Layout system

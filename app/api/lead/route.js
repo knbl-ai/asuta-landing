@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { submitLead } from '@/lib/salesforce';
+import { deliverLead } from '@/lib/leadDelivery';
 import { validateLead } from '@/lib/validation';
 
 export const runtime = 'nodejs';
@@ -22,21 +22,22 @@ export async function POST(request) {
 
   const origin = process.env.NEXT_PUBLIC_SITE_URL || new URL(request.url).origin;
   try {
-    const result = await submitLead(
+    const { ok, results } = await deliverLead(
       {
         fullName: body.fullName,
         phone: body.phone,
         department: body.department,
         gclid: typeof body.gclid === 'string' ? body.gclid : '',
+        source: request.headers.get('referer') || origin,
       },
       { returnUrl: `${origin}/thank-you` },
     );
     // No personal details in the logs.
-    console.log('[lead]', JSON.stringify({ mode: result.mode, status: result.status, ok: result.ok, gclid: !!body.gclid }));
-    if (!result.ok) return NextResponse.json({ ok: false, error: 'crm_error' }, { status: 502 });
+    console.log('[lead]', JSON.stringify({ ok, gclid: !!body.gclid, results }));
+    if (!ok) return NextResponse.json({ ok: false, error: 'crm_error' }, { status: 502 });
     return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error('[lead] submit failed:', err.message);
+    console.error('[lead] delivery failed:', err.message);
     return NextResponse.json({ ok: false, error: 'crm_unreachable' }, { status: 502 });
   }
 }

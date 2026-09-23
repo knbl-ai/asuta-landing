@@ -2,6 +2,7 @@
   "name": "asuta-landing",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +10,8 @@
     "shots": "node scripts/screenshots.mjs",
     "lint": "eslint .",
     "a11y": "node scripts/a11y-audit.mjs",
-    "a11y:behaviour": "node scripts/a11y-behaviour.mjs"
+    "a11y:behaviour": "node scripts/a11y-behaviour.mjs",
+    "sheets:check": "node --env-file-if-exists=.env.local scripts/sheets-check.mjs"
   },
   "dependencies": {
     "next": "^16.3.5",

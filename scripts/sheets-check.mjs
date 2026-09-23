@@ -25,12 +25,18 @@ const lead = {
 
 try {
   await appendLeadToSheet(lead);
-  console.log('OK — test row appended to the sheet:');
-  console.log(`   https://docs.google.com/spreadsheets/d/${process.env.GOOGLE_SHEETS_ID}/edit`);
+  const via = process.env.GOOGLE_SHEETS_WEBAPP_URL ? 'Apps Script web app' : 'service account';
+  console.log(`OK — test row appended to the sheet (via the ${via}).`);
+  if (process.env.GOOGLE_SHEETS_ID) {
+    console.log(`   https://docs.google.com/spreadsheets/d/${process.env.GOOGLE_SHEETS_ID}/edit`);
+  }
   console.log('   Delete that row once you have seen it.');
 } catch (err) {
   console.error('FAILED —', err.message);
-  if (/permission|not found|403|404/i.test(err.message)) {
+  if (process.env.GOOGLE_SHEETS_WEBAPP_URL) {
+    console.error('   Check the web app: "Who has access: Anyone", and that the deployment was');
+    console.error('   republished after the last code change (Manage deployments -> Edit -> New version).');
+  } else if (/permission|not found|403|404/i.test(err.message)) {
     console.error(`   Check that the sheet is shared as Editor with ${process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL}`);
     console.error('   and that GOOGLE_SHEETS_ID is the id from the sheet URL.');
   }

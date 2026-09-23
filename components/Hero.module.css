@@ -26,6 +26,57 @@
   object-fit: cover;
 }
 
+/* One slide per medical field, stacked and crossfaded by HeroRotator.
+   `visibility` keeps the hidden slides out of the accessibility tree too. */
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease, visibility 0s linear 0.8s;
+}
+
+.rotator[data-slide='0'] .slide0,
+.rotator[data-slide='1'] .slide1,
+.rotator[data-slide='2'] .slide2 {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.8s ease, visibility 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide {
+    transition: none;
+  }
+}
+
+.rotatorToggle {
+  position: absolute;
+  left: 1.8rem;
+  top: 1rem;
+  z-index: 2;
+  width: 3.4rem;
+  height: 3.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.85);
+  color: var(--maccabi);
+  cursor: pointer;
+}
+
+.rotatorToggle svg {
+  width: 55%;
+  height: 55%;
+}
+
+.rotatorToggle:hover {
+  background: var(--white);
+}
+
 /* Soft dark fade behind the caption so white text keeps 3:1 on bright parts of the photo. */
 .photo::after {
   content: '';
@@ -50,13 +101,13 @@
 
 .captionUs {
   left: 20.14rem;
-  top: 15.35rem;
+  bottom: 4.39rem;
   width: 14.33rem;
 }
 
 .captionBaby {
   left: 1.8rem;
-  top: 18.68rem;
+  bottom: 4.39rem;
   width: 14.22rem;
 }
 
@@ -185,14 +236,21 @@
 
   .captionUs {
     left: 3.01rem;
-    top: 69.72rem;
+    bottom: 4.7rem;
     width: 29.96rem;
   }
 
   .captionBaby {
     left: 3.05rem;
-    top: 69.72rem;
+    bottom: 4.98rem;
     width: 29.73rem;
+  }
+
+  .rotatorToggle {
+    left: 118.9rem;
+    top: 0.8rem;
+    width: 4rem;
+    height: 4rem;
   }
 
   .panel {

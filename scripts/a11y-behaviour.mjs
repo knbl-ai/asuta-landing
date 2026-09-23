@@ -249,6 +249,41 @@ for (const width of [1600, 375]) {
   await ctx.close();
 }
 
+// ---------- hero slideshow (2.2.2) ----------
+{
+  const ctx = await browser.newContext({ viewport: { width: 1600, height: 900 } });
+  const page = await ctx.newPage();
+  await page.goto(BASE, { waitUntil: 'networkidle' });
+  const slide = () => page.evaluate(() => document.querySelector('[data-slide]').dataset.slide);
+  const first = await slide();
+  await page.waitForTimeout(7000);
+  check('hero rotates on its own', (await slide()) !== first, `slide ${first} -> ${await slide()}`);
+
+  const toggle = page.locator('button[aria-label^="עצירת חילופי"]');
+  await toggle.click();
+  const held = await slide();
+  await page.waitForTimeout(7000);
+  check('hero pause button stops the rotation', (await slide()) === held, `held on slide ${held}`);
+  check('pause button label reflects its state', (await page.locator('button[aria-label^="הפעלת חילופי"]').count()) === 1);
+
+  const visible = await page.evaluate(() =>
+    [...document.querySelectorAll('section[aria-labelledby="hero-title"] figcaption')]
+      .filter((c) => getComputedStyle(c).visibility === 'visible').length);
+  check('only the visible slide is exposed', visible === 2, `${visible} captions visible`);
+  await ctx.close();
+}
+
+{
+  const ctx = await browser.newContext({ viewport: { width: 1600, height: 900 }, reducedMotion: 'reduce' });
+  const page = await ctx.newPage();
+  await page.goto(BASE, { waitUntil: 'networkidle' });
+  const before = await page.evaluate(() => document.querySelector('[data-slide]').dataset.slide);
+  await page.waitForTimeout(7000);
+  const after = await page.evaluate(() => document.querySelector('[data-slide]').dataset.slide);
+  check('reduced motion keeps the hero still', before === after, `slide ${before}`);
+  await ctx.close();
+}
+
 // ---------- testimonials carousel arrows ----------
 {
   const ctx = await browser.newContext({ viewport: { width: 375, height: 800 } });

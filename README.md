@@ -68,6 +68,14 @@ Line breaks that exist in only one layout use `<br className="br-desktop" />` / 
 `npm run shots -- http://localhost:3000 screenshots` saves full-page screenshots at both design widths
 (needs Google Chrome), for comparing against the PDF.
 
+## Hero slideshow
+
+The hero cycles through one slide per medical field every 6 seconds, changing both
+photos and both captions together: נשים ויולדות, אורתופדיה, קרדיולוגיה. The slides are
+listed in `components/Hero.jsx`; add or reorder entries there. `components/HeroRotator.jsx`
+only flips a data attribute, and the rotation stops on the pause button, under
+`prefers-reduced-motion`, and while the tab is in the background.
+
 ## Accessibility
 
 Built to **IS 5568** (WCAG 2.1 AA), which binds any organisation serving the Israeli
@@ -94,3 +102,5 @@ Import the repository in Vercel and set the environment variables above (`SF_MOD
 - The production Salesforce org id and GCLID field id.
 - The card photos in the design are stock previews with "Magnific" watermarks. They need to be
   replaced with licensed images before launch (`assets/images/card-*`).
+- The hero photos were supplied at 384x884 (desktop crop), which is about the frame's size
+  at 1x. Higher-resolution versions would look sharper on retina screens.

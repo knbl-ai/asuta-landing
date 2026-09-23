@@ -1,50 +1,115 @@
 import ArtImage from './ArtImage';
+import HeroRotator from './HeroRotator';
 import styles from './Hero.module.css';
-import usDesktop from '@/assets/images/hero-ultrasound-d.jpg';
-import usMobile from '@/assets/images/hero-ultrasound-m.jpg';
-import babyDesktop from '@/assets/images/hero-baby-d.jpg';
-import babyMobile from '@/assets/images/hero-baby-m.jpg';
+import maternityStartD from '@/assets/images/hero/maternity-start-d.jpg';
+import maternityStartM from '@/assets/images/hero/maternity-start-m.jpg';
+import maternityEndD from '@/assets/images/hero/maternity-end-d.jpg';
+import maternityEndM from '@/assets/images/hero/maternity-end-m.jpg';
+import cardiologyStartD from '@/assets/images/hero/cardiology-start-d.jpg';
+import cardiologyStartM from '@/assets/images/hero/cardiology-start-m.jpg';
+import cardiologyEndD from '@/assets/images/hero/cardiology-end-d.jpg';
+import cardiologyEndM from '@/assets/images/hero/cardiology-end-m.jpg';
+import orthopedicsStartD from '@/assets/images/hero/orthopedics-start-d.jpg';
+import orthopedicsStartM from '@/assets/images/hero/orthopedics-start-m.jpg';
+import orthopedicsEndD from '@/assets/images/hero/orthopedics-end-d.jpg';
+import orthopedicsEndM from '@/assets/images/hero/orthopedics-end-m.jpg';
 
 const D_SIZES = '(min-width: 1600px) 360px, 22.5vw';
 const M_SIZES = '(min-width: 480px) 455px, 95vw';
+
+/*
+ * The hero cycles through one slide per medical field: the photo on the right is
+ * where the journey starts, the one on the left is where it leads.
+ */
+const SLIDES = [
+  {
+    id: 'maternity',
+    label: 'נשים ויולדות',
+    start: {
+      desktop: maternityStartD,
+      mobile: maternityStartM,
+      alt: 'בדיקת אולטרסאונד לאישה בהריון',
+      caption: ['מהאולטרסאונד', 'הראשון'],
+    },
+    end: {
+      desktop: maternityEndD,
+      mobile: maternityEndM,
+      alt: 'אם מחבקת את התינוק שנולד זה עתה',
+      caption: ['ועד שסוף-סוף', 'נפגשים'],
+    },
+  },
+  {
+    id: 'orthopedics',
+    label: 'אורתופדיה',
+    start: {
+      desktop: orthopedicsStartD,
+      mobile: orthopedicsStartM,
+      alt: 'רופא מציג צילום רנטגן של כף רגל למשפחה',
+      caption: ['מהצילום', 'הראשון'],
+    },
+    end: {
+      desktop: orthopedicsEndD,
+      mobile: orthopedicsEndM,
+      alt: 'ילד רוכב על אופניים עם קסדה',
+      caption: ['ועד הרכיבה', 'הבאה'],
+    },
+  },
+  {
+    id: 'cardiology',
+    label: 'קרדיולוגיה',
+    start: {
+      desktop: cardiologyStartD,
+      mobile: cardiologyStartM,
+      alt: 'מטופל מחובר למכשיר א.ק.ג',
+      caption: ['מהא.ק.ג', 'הראשון'],
+    },
+    end: {
+      desktop: cardiologyEndD,
+      mobile: cardiologyEndM,
+      alt: 'גבר מחייך רץ בחוץ',
+      caption: ['ועד שחוזרים', 'לסמוך על הלב'],
+    },
+  },
+];
+
+function Slide({ photo, index, priority, captionClass }) {
+  return (
+    <div className={`${styles.slide} ${styles[`slide${index}`]}`}>
+      <ArtImage
+        desktop={photo.desktop}
+        mobile={photo.mobile}
+        alt={photo.alt}
+        className={styles.img}
+        desktopSizes={D_SIZES}
+        mobileSizes={M_SIZES}
+        priority={priority}
+      />
+      <figcaption className={`${styles.caption} ${captionClass}`}>
+        {photo.caption[0]}
+        <br />
+        {photo.caption[1]}
+      </figcaption>
+    </div>
+  );
+}
 
 export default function Hero() {
   return (
     <section className={styles.hero} aria-labelledby="hero-title">
       <div className={`frame ${styles.frame}`}>
-        <figure className={`${styles.photo} ${styles.photoUs}`}>
-          <ArtImage
-            desktop={usDesktop}
-            mobile={usMobile}
-            alt="בדיקת אולטרסאונד לאישה בהריון"
-            className={styles.img}
-            desktopSizes={D_SIZES}
-            mobileSizes={M_SIZES}
-            priority
-          />
-          <figcaption className={`${styles.caption} ${styles.captionUs}`}>
-            מהאולטרסאונד
-            <br />
-            הראשון
-          </figcaption>
-        </figure>
+        <HeroRotator count={SLIDES.length} labels={SLIDES.map((s) => s.label)}>
+          <figure className={`${styles.photo} ${styles.photoUs}`}>
+            {SLIDES.map((slide, i) => (
+              <Slide key={slide.id} photo={slide.start} index={i} priority={i === 0} captionClass={styles.captionUs} />
+            ))}
+          </figure>
 
-        <figure className={`${styles.photo} ${styles.photoBaby}`}>
-          <ArtImage
-            desktop={babyDesktop}
-            mobile={babyMobile}
-            alt="אם מחבקת את התינוק שנולד זה עתה"
-            className={styles.img}
-            desktopSizes={D_SIZES}
-            mobileSizes={M_SIZES}
-            priority
-          />
-          <figcaption className={`${styles.caption} ${styles.captionBaby}`}>
-            ועד שסוף-סוף
-            <br />
-            נפגשים
-          </figcaption>
-        </figure>
+          <figure className={`${styles.photo} ${styles.photoBaby}`}>
+            {SLIDES.map((slide, i) => (
+              <Slide key={slide.id} photo={slide.end} index={i} priority={i === 0} captionClass={styles.captionBaby} />
+            ))}
+          </figure>
+        </HeroRotator>
 
         <div className={styles.panel}>
           <h1 id="hero-title" className={styles.title}>

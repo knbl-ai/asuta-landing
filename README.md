@@ -39,6 +39,9 @@ Open `http://localhost:3000/?gclid=TEST12345` to check that the GCLID is capture
 | `SF_ENDPOINT` | Web-to-Lead URL. UAT: `https://test.salesforce.com/...`, prod: `https://webto.salesforce.com/...` |
 | `SF_OID` | Salesforce org id (UAT: `00D7E000000FWtK`) |
 | `SF_GCLID_FIELD` | Custom Lead field id for the GCLID (UAT: `00NWl000000Q9E9`) |
+| `SF_CAMPAIGN_ID` | Campaign the lead is attached to (UAT test campaign: `7017E000000edePQAQ`) |
+| `SF_LEAD_SOURCE` | `lead_source` value, default `Web` |
+| `SF_RETURL` | Optional fixed `retURL`; defaults to the site's own `/thank-you` |
 | `SF_DEBUG` / `SF_DEBUG_EMAIL` | Salesforce debug mode (emails a field-mapping report). Never enable in production |
 | `LEAD_DESTINATION` | `salesforce` (default), `sheets` or `both` |
 | `GOOGLE_SHEETS_WEBAPP_URL` / `GOOGLE_SHEETS_WEBAPP_TOKEN` | Apps Script web app bound to the leads sheet (quickest setup) |
@@ -56,13 +59,25 @@ The production org id and GCLID field id still need to be confirmed with Assuta.
    That code maps the fields to Web-to-Lead:
    - full name → `first_name` (first word) and `last_name` (the rest)
    - phone → `phone`, normalised to digits (`+972` → `0`)
-   - medical field → `description` (`תחום רפואי: …`)
-   - gclid → `SF_GCLID_FIELD`
+   - medical field → `description` (`תחום רפואי: …`), the field Assuta confirmed
+   - gclid → `SF_GCLID_FIELD`, never shown to the visitor
+   - `lead_source` and `Campaign_ID` from the environment
 Where the lead goes is `LEAD_DESTINATION`: `salesforce` (default), `sheets`, or `both`
 while one of them is being set up. See [`docs/google-sheets.md`](docs/google-sheets.md) for
 the Google Sheet setup and `npm run sheets:check` to verify it.
 
 4. On success the browser goes to `/thank-you` (a clean URL for the Google Ads conversion; noindex).
+
+## Analytics
+
+Assuta's Google Tag Manager container (`GTM-TD2ZS74`) is loaded from `app/layout.js` on
+every route, so it also covers `/thank-you` where the Google Ads conversion fires. The
+container id is in the code, not an environment variable — it ships in the page anyway.
+The `<noscript>` iframe is the second half of Google's snippet, for visitors without
+JavaScript.
+
+The site's own GCLID capture (`lib/gclid.js`) is independent of GTM: it is what puts the
+click id on the lead itself.
 
 ## Layout system
 
